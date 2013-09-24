@@ -1,0 +1,7 @@
+name: LunaServerTP
+main: net.shiroumi.spigot.bungeecord.LunaServerTP
+version: 1.0
+author: Laica-Lunasys
+commands:
+  svtp:
+    permission: lunasvtp.tp
