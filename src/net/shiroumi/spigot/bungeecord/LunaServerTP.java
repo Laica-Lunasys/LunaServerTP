@@ -60,11 +60,11 @@ public class LunaServerTP extends JavaPlugin
     this.plugin = plugin;
   }
 
-  public boolean onCommand1(CommandSender sender, Command cmd, String commandLabel, String[] args)
+  public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
   {
     if (commandLabel.equalsIgnoreCase("svtp"))
     {
-      //未使用に付きコメント PluginDescriptionFile pdfFile = getDescription();
+      //未使用につきコメント  PluginDescriptionFile pdfFile = getDescription();
       if (args.length != 1)
       {
        
@@ -74,10 +74,9 @@ public class LunaServerTP extends JavaPlugin
         if (sender.hasPermission("lunasvtp.tp"))
         {
           server = args[0];
-          sender.sendMessage(ChatColor.GRAY + "接続中...");
-          
-//sender.sendMessage(ChatColor.GOLD + "[" + pdfFile.getName() + "] " + "Sending to " + server + ".");//
-          
+          // + server + でサーバー名取得可能
+          sender.sendMessage(ChatColor.GRAY + "接続中....");
+
           Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
           ByteArrayOutputStream b = new ByteArrayOutputStream();
@@ -87,7 +86,6 @@ public class LunaServerTP extends JavaPlugin
             out.writeUTF("Connect");
             out.writeUTF(server);
           }
-          
           catch (IOException localIOException)
           {
           }
@@ -96,29 +94,15 @@ public class LunaServerTP extends JavaPlugin
         }
         else
         {
-          sender.sendMessage(ChatColor.RED + "You do not have permission.");
+          sender.sendMessage(ChatColor.RED + "権限がありません");
         }
-      } else
-		sender.sendMessage(ChatColor.RED + "You do not have permission.");
-    }
-	return true;}
-  
-    
-    public boolean onCommand2(CommandSender sender, Command cmd, String commandLabel, String[] args)
-    {
-      if (commandLabel.equalsIgnoreCase("svtp"))
+      }
+      else
       {
-        //未使用に付きコメント PluginDescriptionFile pdfFile = getDescription();
-        {
-         
-        }}
-      
-        else if ((sender instanceof Player))
-        {
-            server = args[0];
-            sender.sendMessage(ChatColor.RED + "引数がたりません！ /svtp サーバー名");
-            
+        sender.sendMessage(ChatColor.RED + "プレイヤーから実行する必要があります。");
+      }
+    }
 
+    return true;
   }
-	return true;
-	}}
+}
